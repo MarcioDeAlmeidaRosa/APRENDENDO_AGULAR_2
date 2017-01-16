@@ -1,0 +1,125 @@
+Estrutura do Angular2
+estrutura de pasta
+
+app --> onde ficará todo código fonte da aplicação
+contetá arquivos .ts (typescript), arquivos .map, criado para ajudar a encontrar os arquivos e .js que é o arquivo transpilado final.
+
+assets --> onde conterá os arquivos .css da aplicação
+
+-------estrutura raiz----------------------------
+package.json --> contém os pacotes necessário para rodar o node, aponta as dependências do projeto.
+quando contém esse arquivo, é neecssário fazer a instalação dos pacotes necessários para a execução do programa, com o comando npm install pelo propt do windows
+os arquivos instalados ficam no diretório node_modules
+
+index.html --> arquivo principal da nossa aplicação
+
+systemjs.config.js --> sistema de gerenciamento de módulos que é usuado pelo AngularJs 2
+
+tscondig.json --> configurações do TypeScript, definições se o código TypeScript seja transpilado para ECMAN Script 6 ou 5 e outra condigurações
+
+typings.json --> é um gerenciado para o TypeScript, onde podemos colocar as referências para as outras bibliotecas para que o typescript consiga entender e converter o código.
+
+Entendendo o index.html
+
+tag meta --> UTF-8    --> para aceitar caracterers especials
+<meta charset="UTF-8">
+
+tag meta --> viewport --> conseguimos executar nossa app em um browser desktop, celular, tablet
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+import dos arquivos de css para o estilo da página
+<!-- Bootstrap -->
+<link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.css">
+<!-- CSS -->
+<link rel="stylesheet" href="assets/css/app.css">
+<link rel="stylesheet" href="styles.css">
+
+
+import de bibliotecas de dependência do Angular2
+
+o sistema de dependência padrão do Angular2 é systemjs, esse tem seu arquivo de configuração próprio que é o systemjs.config.js
+
+Linha que faz importar:
+<script src="systemjs.config.js"></script>
+<script>
+  System.import('app').catch(function(err){ console.error(err); }); ----> espécie de bootstrap da nossa aplicação, essa linha que vai importar nosso código fonte que fazer com que seja executado.
+</script>
+
+
+
+definição a própria aplicação
+<my-app>Loading...</my-app>--> feita referência no arquivo TypeScript principal da nossa aplicação, o nome da tag que utilizamos aqui (my-app), dentro da pasta app existe um arquivo chama app.component.ts que é o arquivo javascript
+
+Criando um component no Angular2( arquivo: app.component.ts)
+
+
+
+            __> Para conseguir usar o Decorator, é necessário importar a classe Component do pacote do Angular
+           |
+           |       
+import { Component } from '@angular/core';
+
+   __> definição de metadado (Decorator que informa que essa classe é um componente
+  |
+  |
+@Component({
+    selector: 'my-app',<--Metadata: Nome da Div, que será criada
+    template: '<h1>Angular 2 Boilerplate</h1><p>Olá Mundo!</p>' <-- Metadata: tamplate HTML
+})
+export class AppComponent { } <-- definição da classe TypeScript
+  |
+  |
+  |__> exportar classe para que outras classes possam importá-la
+
+
+Para esse componente ter o bootstrap e poder ser inicializado, existe um arquivo no nosso projeto que é o main.ts
+
+
+Configurando inicialização do bootstrap no Angular2( arquivo: main.ts)
+
+import {bootstrap}    from '@angular/platform-browser-dynamic' <--importando o bootstrap que faz parte do projeto do Angular2
+import {AppComponent} from './app.component' <-- Como exportamos a classe no momento da criação do componente, podemos importar aqui para ser utilizado abaixo, não precisa usar o .ts
+
+bootstrap{AppComponent}; <---- inicializa a app instanciando o AppComponent(componente principal da nossa aplicação)
+
+
+Arquivo: Systemjs.config
+para o projeto do Angular conseguir carregar todos os arquivos na memória (nosso código, código do angular e todas as suas dependências), para isso é utilizado o Systemjs.config
+
+Primeiro ponto do arquivo Systemjs.config é o mapeamento das bibliotecas:
+// map tells the System loader where to look for things
+map: {
+  // our app is within the app folder
+  app: 'app', <-----Os arquivos .js compilados do TypeScript que estão no diretório app que serão executados no browser
+
+  // angular bundles
+  '@angular/core': 'npm:@angular/core/bundles/core.umd.js',
+  '@angular/common': 'npm:@angular/common/bundles/common.umd.js',
+  '@angular/compiler': 'npm:@angular/compiler/bundles/compiler.umd.js',
+  '@angular/platform-browser': 'npm:@angular/platform-browser/bundles/platform-browser.umd.js',
+  '@angular/platform-browser-dynamic': 'npm:@angular/platform-browser-dynamic/bundles/platform-browser-dynamic.umd.js',
+  '@angular/http': 'npm:@angular/http/bundles/http.umd.js',
+  '@angular/router': 'npm:@angular/router/bundles/router.umd.js',
+  '@angular/forms': 'npm:@angular/forms/bundles/forms.umd.js',
+
+  // other libraries
+  'rxjs':                       'npm:rxjs',
+  'angular2-in-memory-web-api': 'npm:angular2-in-memory-web-api',
+}
+
+// packages tells the System loader how to load when no filename and/or no extension
+    packages: {
+      app: {
+        main: './main.js', <-- app/main.js é responsável por inicializar a app
+        defaultExtension: 'js'
+      },
+      rxjs: {
+        defaultExtension: 'js'
+      },
+      'angular2-in-memory-web-api': {
+        main: './index.js',
+        defaultExtension: 'js'
+      }
+    }
+
+PADRÃO DE MÓDULO USADO NESTE PROJETO É O System.JS, existem outros tais como o System.JS, Webpack, Browserify ou JSPM
