@@ -1,0 +1,1 @@
+https://github.com/johnpapa/vscode-angular2-snippets
