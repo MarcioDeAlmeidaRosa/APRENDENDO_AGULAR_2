@@ -1,0 +1,29 @@
+<section>
+  <article>
+    <h3>Event binding</h3>
+    <div>
+      <button type="button" (click)="onClick()">Me clique!</button>
+      <br><br>
+      <input type="text" 
+             (keyup)="onKeyup($event)"
+             (keyup.enter)="onSave($event.target.value)"  
+             (blur)="onSave(campo.value)"
+             #campo
+      >
+      <div>Conteúdo Atual:
+        {{conteudoAtual}}
+      </div>
+      <br><br>
+      <div>Conteúdo Salvo:
+        {{conteudoSalvo}}
+      </div>
+
+      <br><br>
+      <span (mouseover)="onMouseSanp()" 
+            (mouseout)="onMouseSanp()"
+            [class.highlight]="isMouseOver"
+      >Passe o mouse sobre mim!</span>
+      
+    </div>
+  </article>
+</section>
