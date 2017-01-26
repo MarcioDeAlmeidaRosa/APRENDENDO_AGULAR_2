@@ -1,0 +1,42 @@
+<section>
+  <article>
+    <h3>Two-way data binding <strong>- FORMA 1</strong></h3>
+    <div>
+      <p>Seu nome é: {{nome}}</p>
+      <input type="text" [value]="nome" (input)="nome = $event.target.value" >
+    </div>
+  </article>
+  <article>
+    <h3>Two-way data binding <strong>- FORMA 2</strong></h3>
+    <div>
+      <p>Seu telefone é: {{telefone}}</p>
+      <input type="text" [ngModel]="telefone" (ngModelChange)="telefone = $event" >
+    </div>
+  </article>
+  <article>
+    <h3>Two-way data binding <strong>- FORMA 3</strong></h3>
+    <div>
+      <p>Seu apelido é: {{apelido}}</p>
+      <input type="text" [(ngModel)]="apelido">
+    </div>
+  </article>
+  <article>
+    <h3>Two-way data binding <strong>- FORMA 4</strong></h3>
+    <div>
+      <p>Seu tamanho de pé é: {{tamanhoDePe}}</p>
+      <input type="text" bindon-ngModel="tamanhoDePe">
+    </div>
+  </article>
+
+  <article>
+    <h3>Two-way data binding <strong>- FORMA 5 - em objeto</strong></h3>
+    <div>
+      <p>O nome da pessoa é: {{pessoa.nome}} e seu telefone é {{pessoa.telefone}}</p>
+      <input type="text" [(ngModel)]="pessoa.nome">
+      <br>
+      <input type="text" [(ngModel)]="pessoa.telefone">
+      <br>
+      <input type="text" [(ngModel)]="pessoa.apelido">
+    </div>
+  </article>
+</section>
