@@ -1,0 +1,23 @@
+<section class="property-binding">
+    <article>
+        <h3>Interpolation / Interpolação</h3>
+        <p>String renderizada com interpolation ----> {{url}}</p>
+        <p>Interpolação, valor sempre do componente para o template, nunca ao contrário.</p>
+        <p>Interpolação é uma forma de property binding</p>
+        <p>{{1+1}}</p>
+        <p>getValor ---> {{getValor()}}</p>
+        <!--expressão permitida-->
+        <p>"minhaVar && minhaVar2" ----> {{minhaVar && minhaVar2}}</p>
+        <p>"1 + 1 + getValor()" ----> 1 + 1 + getValor()</p>
+        <!--expressão permitida-->
+        <!--<p> minhaVar & minhaVar2</p> expressão NÃO permitida-->
+        <!--<p> index++ </p> expressão NÃO permitida-->
+        <img src="{{ urlImage }}/">
+    </article>
+    <article>
+        <h3>Property Binding</h3>
+        <!--[src]  é igual a binding-src-->
+        <img [src]="urlImage" />
+        <img binding-src="urlImage" />
+    </article>
+</section>
